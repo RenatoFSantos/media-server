@@ -39,13 +39,30 @@ const upload = multer({
   }
 });
 
-app.post("/upload/avatar", upload.single("file"), (req, res) => {
-  const imageUrl = `${BASE_URL}/avatars/${req.file.filename}`;
-
-  return res.json({
-    url: imageUrl
+app.post("/upload/avatar", (req, res) => {
+    upload.single("file")(req, res, function (err) {
+      if (err) {
+        console.error("Erro no upload:", err);
+  
+        return res.status(400).json({
+          error: err.message
+        });
+      }
+  
+      if (!req.file) {
+        return res.status(400).json({
+          error: "Nenhum arquivo recebido no campo file"
+        });
+      }
+  
+      const imageUrl = `${BASE_URL}/avatars/${req.file.filename}`;
+  
+      return res.json({
+        url: imageUrl
+      });
+    });
   });
-});
+
 
 app.listen(PORT, () => {
   console.log(`Media server running on port ${PORT}`);
