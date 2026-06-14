@@ -61,8 +61,7 @@ app.post("/upload/avatar", (req, res) => {
         url: imageUrl
       });
     });
-  });
-
+});
 
 app.listen(PORT, () => {
   console.log(`Media server running on port ${PORT}`);
