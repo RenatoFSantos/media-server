@@ -8,7 +8,7 @@ const { v4: uuidv4 } = require("uuid");
 const app = express();
 
 const PORT = process.env.PORT || 3000;
-const BASE_URL = process.env.BASE_URL || "https://media-server.midilabs.com.br";
+const BASE_URL = process.env.BASE_URL || "https://media-server.midilabs.com.br/uploads";
 
 app.use(cors());
 
